@@ -11,22 +11,22 @@ runConfig:
 env:
   # Configure environment variables.
   # See https://firebase.google.com/docs/app-hosting/configure#user-defined-environment
-  - variable: AUTH_DOMAIN
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
     value: web-dev-bytes.firebaseapp.com
   
-  - variable: PROJECT_ID
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
     value: web-dev-bytes
   
-  - variable: STORAGE_BUCKET
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
     value: web-dev-bytes.firebasestorage.app
 
   # Grant access to secrets in Cloud Secret Manager.
   # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
-  - variable: API_KEY
-    secret: projects/1038206052914/secrets/api_key
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    secret: api_key
   
-  - variable: MESSAGING_SENDER_ID
-    secret: projects/1038206052914/secrets/messaging_sender_id
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    secret: messaging_sender_id
   
-  - variable: APP_ID
-    secret: projects/1038206052914/secrets/app_id
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    secret: app_id
