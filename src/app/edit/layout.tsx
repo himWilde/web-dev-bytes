@@ -5,7 +5,7 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../database/config";
 import Login from "../components/login";
 
-export function useUser() {
+function useUser() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
