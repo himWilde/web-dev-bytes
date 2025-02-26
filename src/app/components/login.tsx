@@ -1,20 +1,21 @@
 import { login } from '../database/bytes';
+import { form, subTitle, label, input, button } from '../add/styles';
 
 export default function Login() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <h1>Login</h1>
-        <form action={login} className="w-full max-w-lg">
+    <div>
+        <form action={login} className={form}>
+          <h1 className={subTitle}>Login</h1>
           <fieldset>
-              <label className="w-full mb-4 inline-block" htmlFor="email">Email</label>
-              <input className="text-black w-full mb-4" type="text" id="email" name="email" required />
+              <label className={label} htmlFor="email">Email</label>
+              <input className={input} type="text" id="email" name="email" required />
 
-              <label className="w-full mb-4 inline-block" htmlFor="password">Password</label>
-              <input className="text-black w-full mb-4" type="password" id="password" name="password" required />
+              <label className={label} htmlFor="password">Password</label>
+              <input className={input} type="password" id="password" name="password" required />
   
-              <button className="w-full mb-4" type="submit">Submit</button>
+              <button className={button} type="submit">Submit</button>
           </fieldset>
       </form>
-      </div>
+    </div>
   );
 }

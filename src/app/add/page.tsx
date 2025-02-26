@@ -2,11 +2,10 @@
 
 import { addByte, logout } from '../database/bytes';
 
-export default function Edit () {
+export default function Add () {
   const handleLogout = () => logout();
   return (
-    <div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1>Edit Page</h1>
+    <>
       <button type="button" onClick={handleLogout}>Logout</ button>
       <form action={addByte} className="w-full max-w-lg">
         <fieldset>
@@ -23,7 +22,7 @@ export default function Edit () {
 
             <button className="w-full mb-4" type="submit">Submit</button>
         </fieldset>
-    </form>
-    </div>
+      </form>
+    </>
   );
 }
