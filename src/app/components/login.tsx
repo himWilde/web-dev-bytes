@@ -1,5 +1,5 @@
 import { login } from '../database/bytes';
-import { form, subTitle, label, input, button } from '../add/styles';
+import { form, subTitle, label, input, button } from '../styles';
 
 export default function Login() {
   return (

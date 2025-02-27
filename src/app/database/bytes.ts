@@ -1,31 +1,25 @@
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 import { db, auth } from "./config";
-import { formatTags } from "./helpers";
+import { Byte, ByteContent } from "../types";
+// import { formatTags } from "./helpers";
 
-export async function getBytes() {
+export async function getBytes(): Promise<Byte[]> {
   const query = collection(db, 'bytes');
   const querySnapshot = await getDocs(query);
 
   return querySnapshot.docs.map((doc) => ({
-    id: doc.id,
-    title: doc.data().title as string,
-    summary: doc.data().summary as string,
-    tags: doc.data().tags as string[],
+    id: doc.id as string,
+    content: doc.data().content as ByteContent,
   }));
 }
 
-export async function addByte(formData: FormData) {
-  const title = formData.get('title') as string;
-  const summary = formData.get('summary') as string;
-  const tags = formatTags(formData.get('tags') as string);
+export async function addByte(content: unknown) {
   const user = auth.currentUser as User;
 
   try {
     const docRef = await addDoc(collection(db, "bytes"), {
-      title,
-      summary,
-      tags,
+      content,
       userId: user.uid,
     });
 

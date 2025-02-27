@@ -36,3 +36,81 @@ body {
   background-image: url('/img/shadow-tile.png');
   z-index: -1;
 }
+
+/* Main editor styling */
+.codex-editor {
+  width: 720px;
+  background-color: rgb(255, 255, 255, .025);
+  padding: 40px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+}
+
+/* Paragraph styling */
+.ce-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Header styling */
+.ce-header {
+  margin-bottom: 1rem;
+}
+
+h1.ce-header {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+h2.ce-header {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+h3.ce-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+/* List styling */
+.cdx-list {
+  margin: 1rem 0;
+  padding-left: 40px;
+}
+
+.cdx-list__item {
+  padding: 5px 0;
+} 
+
+.ce-toolbar__actions {
+  right: -80px !important;
+}
+
+/* Toolbar styling */
+.ce-toolbar__content {
+  max-width: 100% !important;
+}
+
+.ce-block__content {
+  max-width: 100% !important;
+  margin: 0 auto;
+}
+
+/* Focus state */
+.codex-editor--focused {
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.ce-toolbar__plus,
+.ce-toolbar__settings-btn {
+  color: black !important;
+  background-color: rgb(225, 225, 225) !important;
+} 

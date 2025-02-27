@@ -16,6 +16,9 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/list": "^2.0.4",
+    "@editorjs/paragraph": "^2.11.7",
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",

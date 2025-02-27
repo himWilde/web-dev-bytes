@@ -1,28 +1,33 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
+import EditorJS from '@editorjs/editorjs';
+import EditorConfig from '../config/editor';
+
 import { addByte, logout } from '../database/bytes';
+import { button } from '../styles';
 
 export default function Add () {
+  const editorRef = useRef<EditorJS | null>(null);
+
+  useEffect(() => {
+    if (!editorRef.current) {
+      editorRef.current = new EditorJS(EditorConfig);
+    }
+  }, []);
+
+  const handleAdd = async () => {
+    const outputData = await editorRef.current?.save();
+
+    if (outputData) addByte(outputData);
+  };
+
   const handleLogout = () => logout();
   return (
     <>
-      <button type="button" onClick={handleLogout}>Logout</ button>
-      <form action={addByte} className="w-full max-w-lg">
-        <fieldset>
-            <legend className="text-2xl w-full mb-4">Add a byte</legend>
-
-            <label className="w-full mb-4 inline-block" htmlFor="title">Title</label>
-            <input className="text-black w-full mb-4" type="text" id="title" name="title" placeholder="Enter the title" required />
-
-            <label className="w-full mb-4 inline-block" htmlFor="summary">Summary</label>
-            <textarea className="text-black w-full mb-4" id="summary" name="summary" placeholder="Write your summary here..." required></textarea>
-
-            <label className="w-full mb-4 inline-block" htmlFor="tags">Tags (comma seperated)</label>
-            <input className="text-black w-full mb-4" type="text" id="tags" name="tags" placeholder="Enter some tags" />
-
-            <button className="w-full mb-4" type="submit">Submit</button>
-        </fieldset>
-      </form>
+      <button type="button" className="mb-10" onClick={handleLogout}>Logout</ button>
+      <div id="editorjs"></div>
+      <button type="button" className={button} onClick={handleAdd}>Add</button>
     </>
   );
 }
