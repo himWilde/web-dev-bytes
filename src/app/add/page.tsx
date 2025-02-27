@@ -23,6 +23,7 @@ export default function Add () {
   };
 
   const handleLogout = () => logout();
+
   return (
     <>
       <button type="button" className="mb-10" onClick={handleLogout}>Logout</ button>

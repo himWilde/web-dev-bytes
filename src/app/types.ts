@@ -1,5 +1,6 @@
 export type Byte = {
   id: string;
+  slug: string;
   content: ByteContent;
 }
 

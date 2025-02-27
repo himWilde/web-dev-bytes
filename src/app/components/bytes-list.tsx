@@ -1,39 +1,28 @@
-import { Byte, ByteBlock } from "../types";
+'use client';
 
-const FormatBlock = ({ block }: { block: ByteBlock }) => {
-  switch (block.type) {
-    case 'header':
-      return (
-        <h2
-          className="text-2xl font-bold mb-4"
-          key={block.id}
-          dangerouslySetInnerHTML={{ __html: block.data.text }}
-        />
-      );
-    case 'paragraph':
-      return (
-        <p
-          key={block.id}
-          dangerouslySetInnerHTML={{ __html: block.data.text }}
-        />
-      );
-    default:
-      return null;
-  }
-}
+import { useRouter } from "next/navigation";
+import { Byte, ByteBlock } from "../types";
+import FormatBlocks from "./format-blocks";
 
 export default function BytesList(
   { bytes }: { bytes: Byte[] }
 ) {
+  const router = useRouter();
+
+  const handleClick = (slug: string) => {
+    router.push(`/view/${slug}`);
+  }
+  
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 w-[1020px]">
       {bytes && bytes.map((byte: Byte) => (
         <div
           key={byte.id}
-          className="p-4 border border-gray-200 rounded-md shadow-sm"
+          className="p-4 border border-2 border-white rounded-md shadow-sm"
+          onClick={() => handleClick(byte.slug || '')}
         >
           {byte.content.blocks.map((block: ByteBlock) => (
-            <FormatBlock key={block.id} block={block} />
+            <FormatBlocks key={block.id} block={block} />
           ))}
         </div>
       ))}
