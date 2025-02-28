@@ -2,6 +2,7 @@
 
 import { useUser } from "../../database/auth";
 import Login from "../../components/login";
+import Loader from "@/app/components/loader";
 
 export default function EditLayout({
   children,
@@ -10,6 +11,7 @@ export default function EditLayout({
 }>) {
   const user = useUser();
 
-  if (!user) return <Login />;
+  if (user === false) return <Loader />;
+  if (user === null) return <Login />;
   return children;
 }

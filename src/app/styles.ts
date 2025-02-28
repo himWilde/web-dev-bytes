@@ -1,6 +1,6 @@
 export const wrapper: string = 'grid col-span-full justify-items-center p-16';
 export const container: string = 'grid grid-cols-2 gap-4 sm:grid-cols-3 w-[1020px]';
-export const card: string = 'p-4 border border-2 border-white rounded-md shadow-sm cursor-pointer';
+export const card: string = 'border rounded-xl border-2 border-white p-8 dot-shadow bg-[#181818] cursor-pointer';
 export const title: string = 'font-(family-name:--font-kanit-sans) text-7xl font-bold mb-4 uppercase';
 export const subTitle: string = 'text-center text-2xl font-bold mb-8';
 export const form: string = 'w-[500px] rounded-xl border-2 border-white p-10 dot-shadow bg-[#181818]';

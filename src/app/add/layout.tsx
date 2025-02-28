@@ -1,6 +1,7 @@
 'use client';
 
 import { useUser } from "../database/auth";
+import Loader from "../components/loader";
 import Login from "../components/login";
 
 export default function AddLayout({
@@ -10,6 +11,7 @@ export default function AddLayout({
 }>) {
   const user = useUser();
 
-  if (!user) return <Login />;
+  if (user === false) return <Loader />;
+  if (user === null) return <Login />;
   return children;
 }

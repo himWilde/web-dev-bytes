@@ -22,7 +22,7 @@ export async function logout() {
 };
 
 export function useUser() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | false>(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => setUser(user));

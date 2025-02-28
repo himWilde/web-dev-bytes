@@ -42,7 +42,7 @@ export async function getByte(slug: string): Promise<Byte> {
   };
 }
 
-export async function addByte(content: ByteContent) {
+export async function addByte(content: ByteContent): Promise<string | undefined> {
   const user = auth.currentUser as User;
   const slug = createSlug(content);
   const isSlugTaken = await checkSlug(slug);
@@ -55,12 +55,15 @@ export async function addByte(content: ByteContent) {
   try {
     const docRef = await addDoc(collection(db, "bytes"), {
       content,
+      slug,
       userId: user.uid,
     });
 
     console.log("Document written with ID:", docRef.id);
   } catch (error) {
     console.error("Error adding document:", error);
+  } finally {
+    return slug;
   }
 }
 export async function updateByte(id: string, content: unknown) {
