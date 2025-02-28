@@ -5,6 +5,7 @@ import EditorJS from '@editorjs/editorjs';
 import EditorConfig from '../config/editor';
 
 import { addByte } from '../database/bytes';
+import { ByteContent } from '../types';
 import { button } from '../styles';
 
 export default function Add () {
@@ -19,7 +20,7 @@ export default function Add () {
   const handleAdd = async () => {
     const outputData = await editorRef.current?.save();
 
-    if (outputData) addByte(outputData);
+    if (outputData) addByte(outputData as ByteContent);
   };
 
   return (

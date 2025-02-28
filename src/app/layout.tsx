@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
 import "./globals.css";
-
+import { ToastContainer } from "react-toastify";
 import Nav from "./components/nav";
 import { title, wrapper } from "./styles";
 
@@ -31,6 +31,7 @@ export default function RootLayout({
           <Nav />
           {children}
         </div>
+        <ToastContainer />
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import { collection, getDocs, addDoc, query, where, updateDoc, doc } from "firebase/firestore";
 import { User } from "firebase/auth";
+import { toast } from "react-toastify";
 import { db, auth } from "./config";
 import { Byte, ByteContent } from "../types";
 // import { formatTags } from "./helpers";
@@ -14,8 +15,17 @@ export async function getBytes(): Promise<Byte[]> {
     content: doc.data().content as ByteContent,
   }));
 }
+export function createSlug(content: ByteContent): string {
+  const slug = content.blocks[0].data.text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
-export async function isSlugTaken(slug: string): Promise<boolean> {
+  return slug;
+}
+
+export async function checkSlug(slug: string): Promise<boolean> {
   const q = query(collection(db, "bytes"), where("slug", "==", slug));
   const querySnapshot = await getDocs(q);
   return !querySnapshot.empty;
@@ -32,8 +42,15 @@ export async function getByte(slug: string): Promise<Byte> {
   };
 }
 
-export async function addByte(content: unknown) {
+export async function addByte(content: ByteContent) {
   const user = auth.currentUser as User;
+  const slug = createSlug(content);
+  const isSlugTaken = await checkSlug(slug);
+
+  if (isSlugTaken) {
+    toast.error("Title is already taken!");
+    return;
+  }
 
   try {
     const docRef = await addDoc(collection(db, "bytes"), {
