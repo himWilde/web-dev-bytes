@@ -2,8 +2,9 @@ import { getByte } from "@/app/database/bytes";
 import { ByteBlock } from "@/app/types";
 import FormatBlocks from "@/app/components/format-blocks";
 
-export default async function View({ params }: { params: { id: string } }) {
-  const byte = await getByte(params.id);
+export default async function View({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const byte = await getByte(id);
   
   return (
     <div className="w-[720px]">
