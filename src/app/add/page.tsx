@@ -4,7 +4,8 @@ import { useRef, useEffect } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import EditorConfig from '../config/editor';
 
-import { addByte, logout } from '../database/bytes';
+import { logout } from '../database/auth';
+import { addByte } from '../database/bytes';
 import { button } from '../styles';
 
 export default function Add () {

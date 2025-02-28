@@ -18,7 +18,7 @@ export default function BytesList(
       {bytes && bytes.map((byte: Byte) => (
         <div
           key={byte.id}
-          className="p-4 border border-2 border-white rounded-md shadow-sm"
+          className="p-4 border border-2 border-white rounded-md shadow-sm cursor-pointer"
           onClick={() => handleClick(byte.slug || '')}
         >
           {byte.content.blocks.map((block: ByteBlock) => (

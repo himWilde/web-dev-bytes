@@ -1,4 +1,4 @@
-import { login } from '../database/bytes';
+import { login } from '../database/auth';
 import { form, subTitle, label, input, button } from '../styles';
 
 export default function Login() {

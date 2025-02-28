@@ -1,5 +1,5 @@
 import { collection, getDocs, addDoc, query, where } from "firebase/firestore";
-import { signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { User } from "firebase/auth";
 import { db, auth } from "./config";
 import { Byte, ByteContent } from "../types";
 // import { formatTags } from "./helpers";
@@ -46,22 +46,3 @@ export async function addByte(content: unknown) {
     console.error("Error adding document:", error);
   }
 }
-
-export async function login(formData: FormData) {
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log('Logged in as: ', userCredential.user.email);
-    })
-    .catch((error) => {
-      console.error('Failed to login: ', error.message);
-    });
-}
-
-export async function logout() {
-  await signOut(auth).then(() => {
-    console.log('User signed out');
-  });
-};
