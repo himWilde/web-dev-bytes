@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, query, where } from "firebase/firestore";
+import { collection, getDocs, addDoc, query, where, updateDoc, doc } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { db, auth } from "./config";
 import { Byte, ByteContent } from "../types";
@@ -46,3 +46,20 @@ export async function addByte(content: unknown) {
     console.error("Error adding document:", error);
   }
 }
+export async function updateByte(id: string, content: unknown) {
+  const user = auth.currentUser as User;
+
+  try {
+    const docRef = doc(db, "bytes", id);
+    await updateDoc(docRef, {
+      content,
+      userId: user.uid
+    });
+
+    console.log("Document updated with ID:", id);
+  } catch (error) {
+    console.error("Error updating document:", error);
+  }
+}
+
+

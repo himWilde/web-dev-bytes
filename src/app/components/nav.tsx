@@ -8,10 +8,7 @@ export default function Nav() {
   const user = useUser();
   const pathname = usePathname();
   const isView = pathname?.startsWith('/view/');
-
-  const handleEdit = () => {
-    // Add logic to edit the byte
-  };
+  const currentPath = pathname?.split('/')[2];
 
   const handleLogout = () => {
     logout();
@@ -22,7 +19,7 @@ export default function Nav() {
       <ul className="flex gap-4">
         <li><Link href="/">Home</Link></li>
         <li><Link href="/add">Add</Link></li>
-        {user && isView && <li><button type="button" onClick={handleEdit}>Edit</button></li>}
+        {isView && <li><Link href={`/edit/${currentPath}`}>Edit</Link></li>}
         {user && <li><button type="button" onClick={handleLogout}>Logout</button></li>}
       </ul>
     </nav>
