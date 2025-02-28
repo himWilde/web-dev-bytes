@@ -9,7 +9,7 @@ export default async function View({ params }: { params: Promise<{ id: string }>
   return (
     <div className="w-[720px]">
       {byte && byte.content.blocks.map((block: ByteBlock) => (
-        <FormatBlocks key={block.id} block={block} />
+        <FormatBlocks key={block.id} block={block} context="view"/>
       ))}
     </div>
   );

@@ -9,12 +9,21 @@ export async function getBytes(): Promise<Byte[]> {
   const query = collection(db, 'bytes');
   const querySnapshot = await getDocs(query);
 
-  return querySnapshot.docs.map((doc) => ({
+  const bytes = querySnapshot.docs.map((doc) => ({
     id: doc.id as string,
     slug: doc.data().slug as string,
     content: doc.data().content as ByteContent,
   }));
+
+  // randomize the bytes
+  for (let i = bytes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [bytes[i], bytes[j]] = [bytes[j], bytes[i]];
+  }
+
+  return bytes;
 }
+
 export function createSlug(content: ByteContent): string {
   const slug = content.blocks[0].data.text
     .toLowerCase()

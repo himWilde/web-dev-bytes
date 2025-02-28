@@ -47,6 +47,11 @@ body {
   z-index: -1;
 }
 
+.dot-shadow--card::before {
+  top: 15px !important;
+  left: 15px !important;
+}
+
 /* Main editor styling */
 .codex-editor {
   width: 720px;
