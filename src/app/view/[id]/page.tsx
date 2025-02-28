@@ -6,7 +6,7 @@ export default async function View({ params }: { params: { id: string } }) {
   const byte = await getByte(params.id);
   
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 w-[1020px]">
+    <div className="w-[720px]">
       {byte && byte.content.blocks.map((block: ByteBlock) => (
         <FormatBlocks key={block.id} block={block} />
       ))}

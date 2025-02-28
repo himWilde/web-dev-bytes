@@ -4,7 +4,6 @@ import { useRef, useEffect } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import EditorConfig from '../config/editor';
 
-import { logout } from '../database/auth';
 import { addByte } from '../database/bytes';
 import { button } from '../styles';
 
@@ -23,11 +22,8 @@ export default function Add () {
     if (outputData) addByte(outputData);
   };
 
-  const handleLogout = () => logout();
-
   return (
     <>
-      <button type="button" className="mb-10" onClick={handleLogout}>Logout</ button>
       <div id="editorjs"></div>
       <button type="button" className={button} onClick={handleAdd}>Add</button>
     </>

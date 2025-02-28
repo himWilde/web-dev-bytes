@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
 import "./globals.css";
+
+import Nav from "./components/nav";
 import { title, wrapper } from "./styles";
 
 const kanitSans = Kanit({
@@ -26,6 +28,7 @@ export default function RootLayout({
       >
         <div className={wrapper}>
           <h1 className={title}>Web Dev Bytes</h1>
+          <Nav />
           {children}
         </div>
       </body>

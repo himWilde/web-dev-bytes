@@ -3,8 +3,9 @@
 import { useRouter } from "next/navigation";
 import { Byte, ByteBlock } from "../types";
 import FormatBlocks from "./format-blocks";
+import { container, card } from "../styles";
 
-export default function BytesList(
+export default function ByteList(
   { bytes }: { bytes: Byte[] }
 ) {
   const router = useRouter();
@@ -14,12 +15,12 @@ export default function BytesList(
   }
   
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 w-[1020px]">
+    <div className={container}>
       {bytes && bytes.map((byte: Byte) => (
         <div
           key={byte.id}
-          className="p-4 border border-2 border-white rounded-md shadow-sm cursor-pointer"
-          onClick={() => handleClick(byte.slug || '')}
+          className={card}
+          onClick={() => handleClick(byte.slug)}
         >
           {byte.content.blocks.map((block: ByteBlock) => (
             <FormatBlocks key={block.id} block={block} />
