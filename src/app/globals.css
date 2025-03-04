@@ -61,6 +61,11 @@ body {
   border-radius: 10px;
 }
 
+.codex-editor ::selection {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
 /* Paragraph styling */
 .ce-paragraph {
   font-size: 1.1rem;
