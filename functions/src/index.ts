@@ -7,8 +7,16 @@ admin.initializeApp();
 
 exports.updateIndex = onDocumentCreated('bytes/{id}', event => {
   const byteId = event.params.id;
-  const byte = event.data?.data();
-  const searchableIndex = createIndex(byte?.title)
+  const snapshot = event.data;
+
+  if (!snapshot) {
+    console.log("No data associated with the event");
+    return;
+  }
+
+  const byte = snapshot.data();
+  console.log('byte', byte);
+  const searchableIndex = createIndex(byte.title)
   const indexedMovie = { ...byte, searchableIndex }
   const db = admin.firestore()
 
