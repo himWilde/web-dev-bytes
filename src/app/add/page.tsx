@@ -5,7 +5,7 @@ import EditorJS from '@editorjs/editorjs';
 import EditorConfig from '../config/editor';
 import { useRouter } from 'next/navigation';
 import { addByte } from '../database/bytes';
-import { ByteContent } from '../types';
+import type { ByteContent } from '../types';
 import { button } from '../styles';
 
 export default function Add () {

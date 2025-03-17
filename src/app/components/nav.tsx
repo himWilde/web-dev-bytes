@@ -15,7 +15,7 @@ export default function Nav() {
   };
 
   return (
-    <nav className="mb-16">
+    <nav className="mb-6">
       <ul className="flex gap-4">
         <li><Link href="/">Home</Link></li>
         <li><Link href="/add">Add</Link></li>

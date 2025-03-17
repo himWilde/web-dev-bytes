@@ -1,15 +1,15 @@
-import { collection, getDocs, addDoc, query, where, updateDoc, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, query, where, updateDoc, doc, limit } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { toast } from "react-toastify";
 import { db, auth } from "./config";
-import { Byte, ByteContent } from "../types";
+import type { Byte, ByteContent, AutoComplete } from "../types";
 // import { formatTags } from "./helpers";
 
 export async function getBytes(): Promise<Byte[]> {
   const query = collection(db, 'bytes');
   const querySnapshot = await getDocs(query);
 
-  const bytes = querySnapshot.docs.map((doc) => ({
+  const bytes = querySnapshot.docs.map(doc => ({
     id: doc.id as string,
     slug: doc.data().slug as string,
     content: doc.data().content as ByteContent,
@@ -63,6 +63,7 @@ export async function addByte(content: ByteContent): Promise<string | undefined>
 
   try {
     const docRef = await addDoc(collection(db, "bytes"), {
+      title: content.blocks[0].data.text,
       content,
       slug,
       userId: user.uid,
@@ -75,12 +76,13 @@ export async function addByte(content: ByteContent): Promise<string | undefined>
     return slug;
   }
 }
-export async function updateByte(id: string, content: unknown) {
+export async function updateByte(id: string, content: ByteContent) {
   const user = auth.currentUser as User;
 
   try {
     const docRef = doc(db, "bytes", id);
     await updateDoc(docRef, {
+      title: content.blocks[0].data.text,
       content,
       userId: user.uid
     });
@@ -91,4 +93,19 @@ export async function updateByte(id: string, content: unknown) {
   }
 }
 
+export async function autoComplete(searchString: string): Promise<AutoComplete[]> {
+  const q = query(
+    collection(db, "bytes"),
+    where(`searchableIndex.${searchString.toLowerCase()}`, "==", true),
+    limit(5)
+  );
+  const querySnapshot = await getDocs(q);
 
+  const autoCompleteArray = querySnapshot.docs.map(doc => ({
+    title: doc.data().title as string,
+    link: doc.data().slug as string,
+    length: searchString.length,
+  }));
+
+  return autoCompleteArray.sort();
+}

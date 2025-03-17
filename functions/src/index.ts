@@ -1,11 +1,15 @@
 import {
-  onDocumentCreated
+  onDocumentCreated,
+  onDocumentUpdated
 } from "firebase-functions/v2/firestore";
 import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-exports.updateIndex = onDocumentCreated('bytes/{id}', event => {
+export const addSearchableIndex = onDocumentCreated({
+  document: "bytes/{id}",
+  region: "europe-west4",
+}, event => {
   const byteId = event.params.id;
   const snapshot = event.data;
 
@@ -15,8 +19,27 @@ exports.updateIndex = onDocumentCreated('bytes/{id}', event => {
   }
 
   const byte = snapshot.data();
-  console.log('byte', byte);
-  const searchableIndex = createIndex(byte.title)
+  const searchableIndex = createIndex(byte.content.blocks[0].data.text)
+  const indexedMovie = { ...byte, searchableIndex }
+  const db = admin.firestore()
+
+  return db.collection('bytes').doc(byteId).set(indexedMovie, { merge: true })
+})
+
+export const updateSearchableIndex = onDocumentUpdated({
+  document: "bytes/{id}",
+  region: "europe-west4",
+}, event => {
+  const byteId = event.params.id;
+  const snapshot = event.data;
+
+  if (!snapshot) {
+    console.log("No data associated with the event");
+    return;
+  }
+
+  const byte = snapshot.after.data();
+  const searchableIndex = createIndex(byte.content.blocks[0].data.text)
   const indexedMovie = { ...byte, searchableIndex }
   const db = admin.firestore()
 

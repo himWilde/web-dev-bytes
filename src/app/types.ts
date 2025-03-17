@@ -19,3 +19,8 @@ export type ByteBlock = {
   }
 }
 
+export type AutoComplete = {
+  title: string;
+  link: string;
+  length: number;
+}

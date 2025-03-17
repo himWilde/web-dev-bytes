@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Byte, ByteBlock } from "../types";
+import type { Byte, ByteBlock } from "../types";
 import FormatBlocks from "./format-blocks";
 import { container, card } from "../styles";
 
